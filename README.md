@@ -39,15 +39,26 @@ Advanced AI-powered cryptocurrency trading bot backend with multiple AI models a
 ### Installation
 
 ```bash
+# Install dependencies
 pip install -r requirements.txt
+pip install TA-Lib optuna huggingface_hub
 ```
+
+### Model Setup
+
+The trained models are not included in the repository due to size constraints. You'll need:
+
+1. **LSTM Models** - Train using `train_lstm_model.py` or use your existing models
+2. **FinBERT Models** - Download from Hugging Face or train custom models
+3. **Mistral 7B** - Uses Hugging Face API (no local download needed)
 
 ### Environment Setup
 
 ```bash
-# Copy and configure environment
-cp .env.example .env
-# Add your API keys and configuration
+# Configure environment variables
+HUGGINGFACE_TOKEN=your_hf_token_here
+USE_HF_API=true
+DEXTER_MISTRAL_MODEL_PATH=models/dexter-mistral-7b-final
 ```
 
 ### Run
