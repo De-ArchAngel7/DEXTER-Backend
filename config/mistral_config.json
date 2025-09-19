@@ -1,0 +1,6 @@
+{
+  "mistral_model_path": "models\\dexter-mistral-7b-final",
+  "base_model_path": "mistral-7b-local",
+  "use_quantization": true,
+  "device": "cpu"
+}
