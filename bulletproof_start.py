@@ -16,7 +16,10 @@ def main():
     port = os.getenv("PORT")
     if not port:
         print("❌ ERROR: PORT environment variable not found!")
+        print(f"📊 Available env vars: {list(os.environ.keys())}")
         sys.exit(1)
+    
+    print(f"✅ PORT environment variable found: {port}")
     
     print(f"🚀 Starting DEXTER on port {port}")
     print(f"🌐 Host: 0.0.0.0")
