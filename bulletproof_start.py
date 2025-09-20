@@ -36,8 +36,11 @@ def main():
         print("🧪 Testing FastAPI app import...")
         from app.main import app
         print("✅ FastAPI app imported successfully")
+        print("🚀 Proceeding to start uvicorn...")
     except Exception as e:
         print(f"❌ Failed to import app: {e}")
+        import traceback
+        traceback.print_exc()
         sys.exit(1)
     
     # Create uvicorn command
@@ -54,14 +57,22 @@ def main():
     
     # Execute with subprocess for better control
     try:
-        subprocess.run(cmd, check=True)
+        print("🎯 Executing uvicorn command...")
+        result = subprocess.run(cmd, check=True, capture_output=False, text=True)
+        print(f"✅ Uvicorn started successfully with exit code: {result.returncode}")
     except KeyboardInterrupt:
         print("🛑 Shutdown requested")
     except subprocess.CalledProcessError as e:
         print(f"❌ Process failed with exit code {e.returncode}")
+        if e.stdout:
+            print(f"📤 STDOUT: {e.stdout}")
+        if e.stderr:
+            print(f"📥 STDERR: {e.stderr}")
         sys.exit(e.returncode)
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
+        import traceback
+        traceback.print_exc()
         sys.exit(1)
 
 if __name__ == "__main__":
