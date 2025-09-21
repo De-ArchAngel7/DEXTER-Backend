@@ -131,6 +131,17 @@ async def register(request: Request):
         "user": {"id": 2, "email": "new@dexter.ai", "username": "new_user"}
     }
 
+# Fallback auth endpoints for frontend compatibility
+@app.post("/auth/login")
+async def login_fallback(request: Request):
+    """Fallback endpoint for frontend calls to /auth/login"""
+    return await login(request)
+
+@app.post("/auth/register")
+async def register_fallback(request: Request):
+    """Fallback endpoint for frontend calls to /auth/register"""
+    return await register(request)
+
 # Chat endpoint
 @app.post("/api/v1/chat")
 async def chat(request: Request):
