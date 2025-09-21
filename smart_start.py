@@ -59,8 +59,8 @@ async def lifespan(app: FastAPI):
             print("🧠 Loading AI modules in background...")
             
             # Import AI modules AFTER server starts
-            from ai_module.ai_fusion_engine import AIFusionEngine
-            from ai_module.unified_conversation_engine import UnifiedConversationEngine
+            from app.ai_module.ai_fusion_engine import AIFusionEngine
+            from app.ai_module.unified_conversation_engine import UnifiedConversationEngine
             
             ai_engine = AIFusionEngine()
             conversation_engine = UnifiedConversationEngine()
