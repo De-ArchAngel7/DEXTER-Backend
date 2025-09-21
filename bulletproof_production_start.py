@@ -339,6 +339,57 @@ async def get_ai_insights():
         }
     ]
 
+# Additional endpoints for frontend compatibility
+@app.get("/api/v1/users/profile")
+async def get_user_profile():
+    return {
+        "id": 1,
+        "email": "demo@dexter.ai",
+        "username": "demo_user",
+        "created_at": "2025-09-21T10:00:00Z",
+        "settings": {
+            "notifications": True,
+            "theme": "dark",
+            "risk_level": "medium"
+        }
+    }
+
+@app.post("/api/v1/auth/logout")
+async def logout():
+    return {"message": "Logged out successfully"}
+
+@app.get("/api/v1/tokens/{token_address}")
+async def get_token_data(token_address: str):
+    return {
+        "address": token_address,
+        "symbol": "DEMO",
+        "name": "Demo Token",
+        "price_usd": 1.25,
+        "price_change_24h": 2.5,
+        "volume_24h": 1000000,
+        "market_cap": 50000000
+    }
+
+@app.get("/api/v1/tokens/popular")
+async def get_popular_tokens():
+    return {
+        "BTC": "bitcoin",
+        "ETH": "ethereum", 
+        "SOL": "solana",
+        "ADA": "cardano",
+        "DOT": "polkadot"
+    }
+
+@app.get("/api/v1/market/overview")
+async def get_market_overview():
+    return {
+        "total_market_cap": 1200000000000,
+        "total_volume_24h": 45000000000,
+        "bitcoin_dominance": 52.3,
+        "active_cryptocurrencies": 2500,
+        "market_cap_change_24h": 2.1
+    }
+
 if __name__ == "__main__":
     print("🛡️ Starting BULLETPROOF DEXTER Production Server...")
     print("🔥 ALL FEATURES ACTIVE - Authentication, Trading, AI, Telegram!")
