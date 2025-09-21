@@ -15,7 +15,11 @@ import os
 # Add backend to path
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..'))
 
-from ai_module.unified_conversation_engine import conversation_engine
+# Conditional AI imports - prevent blocking during startup
+if not os.getenv("DISABLE_AI_IMPORTS", "false").lower() == "true":
+    from ai_module.unified_conversation_engine import conversation_engine
+else:
+    conversation_engine = None
 from app.core.security import get_current_user
 from app.models.user import User
 

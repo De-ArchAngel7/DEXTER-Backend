@@ -5,8 +5,13 @@ from datetime import datetime
 import os
 import structlog
 
-from ai_module.ai_chatbot import AIChatbot
-from ai_module.unified_conversation_engine import conversation_engine
+# Conditional AI imports - prevent blocking during startup
+if not os.getenv("DISABLE_AI_IMPORTS", "false").lower() == "true":
+    from ai_module.ai_chatbot import AIChatbot
+    from ai_module.unified_conversation_engine import conversation_engine
+else:
+    AIChatbot = None
+    conversation_engine = None
 
 logger = structlog.get_logger()
 security = HTTPBearer()
