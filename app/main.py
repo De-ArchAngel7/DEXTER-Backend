@@ -34,6 +34,11 @@ structlog.configure(
 
 logger = structlog.get_logger(__name__)
 
+# Check if AI initialization should be disabled for faster startup
+disable_ai = os.getenv("DISABLE_AI_INIT", "false").lower() == "true"
+if disable_ai:
+    logger.warning("🚨 AI initialization disabled for fast startup")
+
 # Create FastAPI app
 app = FastAPI(
     title="DEXTER AI Trading Bot",
