@@ -222,6 +222,31 @@ async def get_orders():
         {"id": "order_2", "symbol": "ETHUSDT", "side": "SELL", "amount": 2.5, "status": "pending"}
     ]
 
+@app.get("/api/v1/trading/history")
+async def get_trading_history():
+    return [
+        {
+            "id": "trade_001",
+            "symbol": "BTCUSDT", 
+            "side": "BUY",
+            "amount": 0.05,
+            "price": 45000.00,
+            "total": 2250.00,
+            "timestamp": "2025-09-21T10:30:00Z",
+            "status": "completed"
+        },
+        {
+            "id": "trade_002",
+            "symbol": "ETHUSDT",
+            "side": "SELL", 
+            "amount": 1.2,
+            "price": 3200.00,
+            "total": 3840.00,
+            "timestamp": "2025-09-21T09:15:00Z",
+            "status": "completed"
+        }
+    ]
+
 @app.post("/api/v1/trading/execute")
 async def execute_trade(request: Request):
     return {
