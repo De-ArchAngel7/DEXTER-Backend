@@ -31,26 +31,19 @@ def main():
     # Add current directory to Python path
     sys.path.insert(0, ".")
     
-    # Test import first
-    try:
-        print("🧪 Testing FastAPI app import...")
-        from app.main import app
-        print("✅ FastAPI app imported successfully")
-        print("🚀 Proceeding to start uvicorn...")
-    except Exception as e:
-        print(f"❌ Failed to import app: {e}")
-        import traceback
-        traceback.print_exc()
-        sys.exit(1)
+    # Skip import test - let uvicorn handle it
+    print("⚡ Skipping import test - letting uvicorn handle app loading...")
+    print("🚀 Proceeding directly to uvicorn startup...")
     
-    # Create uvicorn command
+    # Create uvicorn command with optimal settings for Render
     cmd = [
         "python", "-m", "uvicorn",
         "app.main:app",
         "--host", "0.0.0.0",
-        "--port", port,
+        "--port", str(port),  # Convert to string
         "--log-level", "info",
-        "--no-access-log"  # Reduce noise
+        "--timeout-keep-alive", "30",  # Keep connections alive longer
+        "--workers", "1"  # Single worker for stability
     ]
     
     print(f"🔧 Running command: {' '.join(cmd)}")
